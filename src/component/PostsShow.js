@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchPost } from "../actions";
+import { fetchPost, deletePost } from "../actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,6 +7,19 @@ class PostsShow extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchPost(id);
+  }
+  // onDeleteCLick() {
+  //   var { id } = this.props.match.params;
+  //   this.props.deletePost(id, () => {
+  //     this.props.history.push("/");
+  //   });
+  // }
+  onDeleteCLick() {
+    const s = this.props.match.params.id;
+
+    this.props.deletePost(s, () => {
+      this.props.history.push("/");
+    });
   }
   render() {
     const { post } = this.props;
@@ -16,6 +29,12 @@ class PostsShow extends Component {
     return (
       <div>
         <Link to="/">GO BACK</Link>
+        <button
+          className="btn btn-danger pull-xs-right"
+          onClick={this.onDeleteCLick.bind(this)}
+        >
+          Delete
+        </button>
         <h2>{post.title}</h2>
         <h6>{post.categories}</h6>
         <p>{post.cotent}</p>
@@ -32,5 +51,5 @@ function mapStateToProps({ post }, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { fetchPost }
+  { fetchPost, deletePost }
 )(PostsShow);

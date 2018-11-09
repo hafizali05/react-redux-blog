@@ -1,4 +1,4 @@
-import { FETCH_POSTS, CREATE_POST, FETCH_POST } from "../actions";
+import { FETCH_POSTS, FETCH_POST } from "../actions";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -6,7 +6,6 @@ export default function(state = {}, action) {
       return _.mapKeys(action.payload.data, "id");
     case FETCH_POST:
       const res = { ...state, [action.payload.data.id]: action.payload.data };
-      console.log("res:", res);
       return res;
     default:
       return state;

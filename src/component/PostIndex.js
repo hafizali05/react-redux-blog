@@ -5,7 +5,7 @@ import { fetchPosts } from "../actions/index";
 import { Link } from "react-router-dom";
 class PostIndex extends Component {
   componentDidMount() {
-    console.log("comp mount", this.props.fetchPosts());
+    this.props.fetchPosts();
   }
   renderPosts() {
     return _.map(this.props.post, post => {
@@ -17,7 +17,6 @@ class PostIndex extends Component {
     });
   }
   render() {
-    console.log("this.state", this.props.post);
     return (
       <div>
         <div className="text-xs-right">
